@@ -7,9 +7,9 @@ public class Board {
 
     public Board() {}
 
-    public void addImage() {}
+    public void addImage(Image i) {}
 
-    public void removeImage() {}
+    public void removeImage(Image i) {}
 
     public void changeBackground () {}
 
