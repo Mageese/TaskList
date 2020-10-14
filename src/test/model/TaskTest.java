@@ -36,10 +36,6 @@ public class TaskTest {
         task.changeStatus();
 
         assertEquals("completed",task.getStatus());
-
-        task.changeStatus();
-
-        assertEquals("not completed", task.getStatus());
     }
 
 }

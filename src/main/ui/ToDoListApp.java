@@ -42,7 +42,6 @@ public class ToDoListApp {
 
     }
 
-
     //EFFECTS: shows options from the to-do list.
     private void displayMenu() {
         System.out.println("\nWhat do you want to do?");
@@ -58,12 +57,8 @@ public class ToDoListApp {
     private void processUser(String user) {
         if (user.equals("a")) {
             addTask();
-        } else if (user.equals("d")) {
-            if (toDoList.getSizeTaskList() > 0) {
-                deleteTask();
-            }
-            System.out.println("No tasks are present in the list!");
-
+        } else if (user.equals("d") && (toDoList.getSizeTaskList() > 0)) {
+            deleteTask();
         } else if (user.equals("f")) {
             markComplete();
         } else if (user.equals("c")) {
@@ -78,20 +73,25 @@ public class ToDoListApp {
     //EFFECTS: adds task to to-do list and details to task
     private void addTask() {
         System.out.println("What task would you like to add?");
-        String newTask = scan.nextLine();
+        String newTask = scan.next() + scan.nextLine();
         Task task = new Task(newTask);
         toDoList.addTask(task);
 
-        System.out.println("Add further detail?");
-        System.out.println("\ty -> Yes");
-        System.out.println("\tn -> No");
+        if (toDoList.getContainsTaskList(task)) {
+            System.out.println("Add further detail?");
+            System.out.println("\ty -> Yes");
+            System.out.println("\tn -> No");
 
-        String confirm = scan.next();
-        confirm = confirm.toLowerCase();
+            String confirm = scan.next() + scan.nextLine();
+            confirm = confirm.toLowerCase();
 
-        if (confirm.equals("yes")) {
-            System.out.println("Provide details");
-            task.addDetails(scan.next());
+            if (confirm.equals("y")) {
+                System.out.println("Provide details");
+                String details = scan.next() + scan.nextLine();
+                task.addDetails(details);
+
+                System.out.println("The details are: " + task.getDetail());
+            }
         }
 
         System.out.println("Alright, done!");
@@ -102,11 +102,12 @@ public class ToDoListApp {
     //EFFECTS: removes task from to-do list
     private void deleteTask() {
         System.out.println("What task would you like to remove?" + " Input the task selected");
-        String selectedTask = scan.nextLine();
+        String selectedTask = scan.next() + scan.nextLine();
 
         for (Task t: toDoList.getTaskList()) {
             if (t.getTask().equals(selectedTask)) {
                 toDoList.removeTask(t);
+                break;
             }
         }
 
@@ -117,7 +118,7 @@ public class ToDoListApp {
     //EFFECTS: changes status of task to completed
     private void markComplete() {
         System.out.println("What task would you like completed?" + " Input the task selected");
-        String selectedTask = scan.nextLine();
+        String selectedTask = scan.nextLine() + scan.nextLine();
 
         for (Task t: toDoList.getTaskList()) {
             if (t.getTask().equals(selectedTask)) {
