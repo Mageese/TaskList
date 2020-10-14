@@ -47,7 +47,7 @@ public class ToDoListApp {
         System.out.println("\nWhat do you want to do?");
         System.out.println("\ta -> Add task");
         System.out.println("\td -> Delete task");
-        System.out.println("\tf -> Mark task as completed");
+        System.out.println("\tf -> Mark task as completed/ not completed");
         System.out.println("\tc -> See completed tasks");
         System.out.println("\tq -> Quit");
     }
@@ -60,7 +60,7 @@ public class ToDoListApp {
         } else if (user.equals("d") && (toDoList.getSizeTaskList() > 0)) {
             deleteTask();
         } else if (user.equals("f")) {
-            markComplete();
+            changeStatus();
         } else if (user.equals("c")) {
             listCompletedTasks();
         } else {
@@ -115,17 +115,19 @@ public class ToDoListApp {
 
     //MODIFIES: this
     //EFFECTS: changes status of task to completed
-    private void markComplete() {
-        System.out.println("What task would you like completed?" + " Input the task selected");
+    private void changeStatus() {
+        System.out.println("What task would you like change status?" + " Input the task selected");
         String selectedTask = scan.nextLine() + scan.nextLine();
+        String status = null;
 
         for (Task t: toDoList.getTaskList()) {
             if (t.getTask().equals(selectedTask)) {
                 t.changeStatus();
+                status = t.getStatus();
             }
         }
 
-        System.out.println(selectedTask + " is completed!");
+        System.out.println(selectedTask + " is " + status);
 
     }
 

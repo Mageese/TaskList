@@ -21,6 +21,8 @@ public class Task {
     public void changeStatus() {
         if (getStatus() == "not completed") {
             status = "completed";
+        } else {
+            status = "not completed";
         }
     }
 
