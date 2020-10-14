@@ -107,7 +107,6 @@ public class ToDoListApp {
         for (Task t: toDoList.getTaskList()) {
             if (t.getTask().equals(selectedTask)) {
                 toDoList.removeTask(t);
-
             }
         }
 
