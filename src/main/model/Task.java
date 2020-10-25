@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Task represents a task with its status and any additional details
-public class Task {
+public class Task implements Writable {
     private String task;
     private String status;
     private String detail;
@@ -18,6 +21,8 @@ public class Task {
         detail = s;
     }
 
+    //MODIFIES: this
+    //EFFECTS: if status is not completed, then status becomes completed, vice versa.
     public void changeStatus() {
         if (getStatus() == "not completed") {
             status = "completed";
@@ -40,4 +45,10 @@ public class Task {
         return task;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("task", task);
+        return json;
+    }
 }

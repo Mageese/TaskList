@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // ToDoList represents a list containing tasks
-public class ToDoList {
+public class ToDoList implements Writable {
     private List<Task> taskList;
 
 
@@ -53,5 +57,22 @@ public class ToDoList {
         return taskList.contains(t);
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("tasklist", tasklistToJson());
+        return json;
+    }
+
+    //EFFECTS: returns tasklist as a Json array
+    private JSONArray tasklistToJson() {
+        JSONArray array = new JSONArray();
+
+        for (Task t: taskList) {
+            array.put(t.toJson());
+        }
+
+        return array;
+    }
 
 }
