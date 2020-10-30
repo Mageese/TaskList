@@ -15,6 +15,6 @@ As a user:
 - I want to **remove** a task on the to-do list
 - I want to see a **list of completed tasks**
 - I want to **save** my to-do list into a file
-- I want to **reload** and **display** my to-do list and continue from where I ended
+- I want to **reload** my to-do list and continue from where I ended
 
 

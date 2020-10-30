@@ -61,7 +61,7 @@ public class ToDoListApp {
         System.out.println("\tf -> Mark task as completed/ not completed");
         System.out.println("\tc -> See completed tasks");
         System.out.println("\ts -> save list to file");
-        System.out.println("\tl -> load list from file and display");
+        System.out.println("\tl -> load list from file");
         System.out.println("\tq -> Quit");
     }
 
@@ -102,18 +102,8 @@ public class ToDoListApp {
         try {
             toDoList = jsonreader.read();
             System.out.println("Loaded " + toDoList + "from " + JSON_STORE);
-            printList();
         } catch (IOException e) {
             System.out.println("Cannot read from the file ");
-        }
-    }
-
-    //EFFECTS: prints all tasks in the list loaded
-    private void printList() {
-        List<Task> tasklist = toDoList.getTaskList();
-
-        for (Task t: tasklist) {
-            System.out.println(t);
         }
     }
 
