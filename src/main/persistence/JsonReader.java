@@ -60,7 +60,13 @@ public class JsonReader {
     //EFFECTS: parses task from JSON object and adds to todolist
     private void addTaskJson(ToDoList td, JSONObject jsonObject) {
         String task = jsonObject.getString("task");
+        String status = jsonObject.getString("status");
+        String detail = jsonObject.getString("detail");
         Task taskNew = new Task(task);
+        taskNew.addDetails(detail);
+        if (status.equals("completed")) {
+            taskNew.changeStatus();
+        } else taskNew.getStatus();
         td.addTask(taskNew);
     }
 }

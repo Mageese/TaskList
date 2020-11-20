@@ -32,7 +32,6 @@ public class ToDoList implements Writable {
     }
 
 
-
     //EFFECTS: lists tasks completed in to-do list
     public List<String> listTasksCompleted() {
         List<String> list = new ArrayList<>();

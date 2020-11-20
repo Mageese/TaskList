@@ -24,7 +24,7 @@ public class Task implements Writable {
     //MODIFIES: this
     //EFFECTS: if status is not completed, then status becomes completed, vice versa.
     public void changeStatus() {
-        if (getStatus() == "not completed") {
+        if (getStatus().equals("not completed")) {
             status = "completed";
         } else {
             status = "not completed";
@@ -49,6 +49,8 @@ public class Task implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("task", task);
+        json.put("status", status);
+        json.put("detail", detail);
         return json;
     }
 }
