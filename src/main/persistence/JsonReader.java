@@ -68,7 +68,7 @@ public class JsonReader {
             taskNew.changeStatus();
         } else {
             taskNew.getStatus();
-            td.addTask(taskNew);
         }
+        td.addTask(taskNew);
     }
 }
