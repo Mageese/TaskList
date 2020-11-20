@@ -5,10 +5,12 @@ import model.ToDoList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class Main extends JFrame {
     private ToDoList list;
     private JsonWriter jsonwriter;
     private JsonReader jsonreader;
-    private ImageIcon icon;
+    private BufferedImage icon;
     private JPanel panel;
     private JLabel label;
     private static final String JSON_STORE = "./data/list.json";
@@ -30,9 +32,9 @@ public class Main extends JFrame {
 
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(200,150));
-        add(panel);
         loadImage();
         setIcon();
+        add(panel);
 
         initializeFields();
         initializeGraphics();
@@ -41,15 +43,17 @@ public class Main extends JFrame {
 
     // EFFECTS: load new image into program
     private void loadImage() {
-        String sep = System.getProperty("file.separator");
-        icon = new ImageIcon(System.getProperty("user.dir") + sep
-                + "images" + sep + "Check.png");
+        try {
+            icon = ImageIO.read(new File("data/Check.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: sets icon into label
     private void setIcon() {
-        label = new JLabel(icon);
+        label = new JLabel(new ImageIcon(icon));
         panel.add(label);
     }
 
