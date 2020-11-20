@@ -9,8 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -20,20 +19,38 @@ public class Main extends JFrame {
     private ToDoList list;
     private JsonWriter jsonwriter;
     private JsonReader jsonreader;
-    private JLabel label;
-    private JPanel panel;
     private ImageIcon icon;
+    private JPanel panel;
+    private JLabel label;
     private static final String JSON_STORE = "./data/list.json";
 
 
     public Main() {
         super("Task List");
 
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(200,150));
+        add(panel);
+        loadImage();
+        setIcon();
+
         initializeFields();
         initializeGraphics();
         initializeLayout();
-//        initializeImage();
+    }
 
+    // EFFECTS: load new image into program
+    private void loadImage() {
+        String sep = System.getProperty("file.separator");
+        icon = new ImageIcon(System.getProperty("user.dir") + sep
+                + "images" + sep + "Check.png");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets icon into label
+    private void setIcon() {
+        label = new JLabel(icon);
+        panel.add(label);
     }
 
     // MODIFIES: this
@@ -42,9 +59,6 @@ public class Main extends JFrame {
         list = new ToDoList();
         jsonwriter = new JsonWriter(JSON_STORE);
         jsonreader = new JsonReader(JSON_STORE);
-        label = new JLabel();
-        panel = new JPanel();
-        panel.setPreferredSize(new Dimension(100, 100));
     }
 
     // MODIFIES: this
@@ -57,31 +71,17 @@ public class Main extends JFrame {
         setVisible(true);
     }
 
-//    // SOURCE: c3 lecture lab
-//    // EFFECTS: produces image
-//    private void initializeImage() {
-//        icon = new ImageIcon("Me.png");
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: adds image to GUI
-//    public void setCheck() {
-//        label = new JLabel(icon);
-//        panel.add(label);
-//        label.setIcon(icon);
-//    }
-
     // MODIFIES: this
     // EFFECTS: adds function and image to GUI
     private void initializeLayout() {
         setLayout(new FlowLayout());
+        setIcon();
         add(makeButton("Add task"));
         add(makeButton("List of completed tasks"));
         add(makeButton("Change status of task"));
         add(makeButton("Remove task"));
         add(makeButton("Save list"));
         add(makeButton("Load list"));
-        add(new JLabel(new ImageIcon("Me.png")));
         pack();
     }
 
