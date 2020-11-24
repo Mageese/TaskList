@@ -93,11 +93,11 @@ public class ToDoTest {
         List<String> list = null;
         try {
             list = toDoList.listTasksCompleted();
+            assertEquals(1, list.size());
         } catch (EmptyListException e) {
+            fail();
             e.printStackTrace();
         }
-
-        assertEquals(1, list.size());
     }
 
     @Test
@@ -113,10 +113,11 @@ public class ToDoTest {
         List<String> list = null;
         try {
             list = toDoList.listTasksCompleted();
+            assertEquals(3, list.size());
         } catch (EmptyListException e) {
+            fail();
             e.printStackTrace();
         }
-        assertEquals(3, list.size());
     }
 
     @Test
@@ -131,15 +132,13 @@ public class ToDoTest {
         List<String> list = null;
         try {
             list = toDoList.listTasksCompleted();
+            assertEquals(2, list.size());
+            assertFalse(list.contains(taskThree.getTask()));
+            assertTrue(toDoList.getTaskList().contains(taskThree));
         } catch (EmptyListException e) {
+            fail();
             e.printStackTrace();
         }
-
-        assertEquals(2, list.size());
-        assertFalse(list.contains(taskThree.getTask()));
-        assertTrue(toDoList.getTaskList().contains(taskThree));
-
-
     }
 
 
