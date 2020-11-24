@@ -17,4 +17,6 @@ As a user:
 - I want to **save** my to-do list into a file
 - I want to **reload** my to-do list and continue from where I ended
 
+- **Phase 4: Task 2**: I have chosen to throw an empty list exception in the list completed task method.
+
 

@@ -1,8 +1,10 @@
 package model;
 
+import exception.EmptyListException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
+import sun.invoke.empty.Empty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +35,18 @@ public class ToDoList implements Writable {
 
 
     //EFFECTS: lists tasks completed in to-do list
-    public List<String> listTasksCompleted() {
+    public List<String> listTasksCompleted() throws EmptyListException {
         List<String> list = new ArrayList<>();
-        for (Task t: taskList) {
+        for (Task t : taskList) {
             if (t.getStatus().equals("completed")) {
                 list.add(t.getTask());
             }
         }
-        return list;
+        if (!(list.size() == 0)) {
+            return list;
+        } else {
+            throw new EmptyListException("No tasks completed");
+        }
     }
 
     //Getters
@@ -67,7 +73,7 @@ public class ToDoList implements Writable {
     private JSONArray tasklistToJson() {
         JSONArray array = new JSONArray();
 
-        for (Task t: taskList) {
+        for (Task t : taskList) {
             array.put(t.toJson());
         }
 

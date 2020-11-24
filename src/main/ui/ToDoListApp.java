@@ -1,5 +1,6 @@
 package ui;
 
+import exception.EmptyListException;
 import model.Task;
 import model.ToDoList;
 import persistence.JsonReader;
@@ -173,7 +174,11 @@ public class ToDoListApp {
 
     //EFFECTS: prints out the completed tasks in to-do list
     private void listCompletedTasks() {
-        System.out.println(toDoList.listTasksCompleted());
+        try {
+            System.out.println(toDoList.listTasksCompleted());
+        } catch (EmptyListException e) {
+            e.printStackTrace();
+        }
     }
 
 }

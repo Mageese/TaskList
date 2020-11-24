@@ -1,5 +1,6 @@
 package ui;
 
+import exception.EmptyListException;
 import model.Task;
 import model.ToDoList;
 import persistence.JsonReader;
@@ -192,7 +193,13 @@ public class Main extends JFrame {
     private void listCompleteTasks(JButton b) {
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ArrayList<String> completedTasks = (ArrayList<String>) list.listTasksCompleted();
+                ArrayList<String> completedTasks = null;
+                try {
+                    completedTasks = (ArrayList<String>) list.listTasksCompleted();
+                } catch (EmptyListException emptyListException) {
+//                    emptyListException.printStackTrace();
+                    JOptionPane.showMessageDialog(null,"No tasks completed");
+                }
                 JOptionPane.showMessageDialog(null, completedTasks,
                         "Printing results", JOptionPane.INFORMATION_MESSAGE);
             }

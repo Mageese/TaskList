@@ -1,5 +1,6 @@
 package model;
 
+import exception.EmptyListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -74,11 +75,27 @@ public class ToDoTest {
     }
 
     @Test
+    public void testListNone() {
+        List<String> list = null;
+        try {
+            list = toDoList.listTasksCompleted();
+            fail("error");
+        } catch (EmptyListException e) {
+            System.out.println("cool");
+        }
+    }
+
+    @Test
     public void testListCompletedOne() {
         taskOne.changeStatus();
         toDoList.addTask(taskOne);
 
-        List<String> list = toDoList.listTasksCompleted();
+        List<String> list = null;
+        try {
+            list = toDoList.listTasksCompleted();
+        } catch (EmptyListException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(1, list.size());
     }
@@ -93,7 +110,12 @@ public class ToDoTest {
         toDoList.addTask(taskTwo);
         toDoList.addTask(taskThree);
 
-        List<String> list = toDoList.listTasksCompleted();
+        List<String> list = null;
+        try {
+            list = toDoList.listTasksCompleted();
+        } catch (EmptyListException e) {
+            e.printStackTrace();
+        }
         assertEquals(3, list.size());
     }
 
@@ -106,7 +128,12 @@ public class ToDoTest {
         toDoList.addTask(taskTwo);
         toDoList.addTask(taskThree);
 
-        List<String> list = toDoList.listTasksCompleted();
+        List<String> list = null;
+        try {
+            list = toDoList.listTasksCompleted();
+        } catch (EmptyListException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(2, list.size());
         assertFalse(list.contains(taskThree.getTask()));
